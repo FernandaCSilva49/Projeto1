@@ -5,7 +5,13 @@ const lista = document.getElementById("lista");
 const apiUrl = "http://localhost:3000/filmes";
 
 const edicao = false;
-const idEdicao = id;
+const idEdicao = 0;
+
+// pegar os dados que o usuario digita no input (Elementos)
+let nome = document.getElementById('nome');
+let imagem = document.getElementById('imagem');
+let genero = document.getElementById('logo');
+let nota = document.getElementById('salario');
 
 
 // faz uma resquisicao do tipo [GET] para o back que recebe todas as vagas cadastradas
@@ -51,9 +57,9 @@ const getFilmes = async () => {
     // é o objeto preenchido com os valores digitados no input
 
     if (edicao) {
-      putVaga(filme, idEdicao);
+      putFilmes(filme, idEdicao);
     } else {
-      createVaga(filme);
+      createFilmes(filme);
     }
 
     clearFields();
@@ -83,7 +89,7 @@ const getFilmes = async () => {
     getFilmes();
   };
  
-  const putFilmes = async(filme, id) => {
+  const putFilmes = async (filme, id) => {
     // estou construindo a requisicao para ser enviada para o backend.
     const request = new Request(`${apiUrl}/edit/${id}`, {
         method:  'PUT',
@@ -118,13 +124,13 @@ const deleteFilmes = async (id) => {
     alert(result.message);
     
     lista.innerHTML = '';
-    getVagas();
+    getFilmes();
 }
 
 
 // [GET] /Vaga/{id} - funcao onde recebe um id via paramtero envia uma requisicao para o backend
 // e retorna o filme de acordo com esse id.
-const getFilmeById = async (id) => {
+const getFilmesById = async (id) => {
     const response = await fetch(`${apiUrl}/${id}`);
     return await response.json();
 }
@@ -133,22 +139,20 @@ const getFilmeById = async (id) => {
 // ao clicar no botao editar
 // ela vai preencher os campos dos inputs
 // para montar o objeto para ser editado
-const editVaga = async (id) => {
+const editFilmes = async (id) => {
     // habilitando o modo de edicao e enviando o id para variavel global de edicao.
     edicao = true;
     idEdicao = id;
 
     //precismo buscar a informacao da vaga por id para popular os campos
     // salva os dados da vaga que vamos editar na variavel vaga.
-    const vaga = await getVagaById(id);
+    const filme = await getFilmesById(id);
 
-    //preencher os campos de acordo com a vaga que vamos editar.
-    titulo.value = vaga.titulo;
-    empresa.value =  vaga.empresa;
-    logo.value = vaga.logo;
-    salario.value = vaga.salario;
-    senioridade.value = vaga.senioridade;
-    descricao.value = vaga.descricao;
+    //preencher os campos de acordo com o filme que vamos editar.
+    nome.value = vaga.nome;
+    imagem.value =  vaga.imagem;
+    genero.value = vaga.genero;
+    nota.value = vaga.nota;;
 }
 
 
