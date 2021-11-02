@@ -10,8 +10,8 @@ const idEdicao = 0;
 // pegar os dados que o usuario digita no input (Elementos)
 let nome = document.getElementById('nome');
 let imagem = document.getElementById('imagem');
-let genero = document.getElementById('logo');
-let nota = document.getElementById('salario');
+let genero = document.getElementById('genero');
+let nota = document.getElementById('nota');
 
 
 // faz uma resquisicao do tipo [GET] para o back que recebe todas as vagas cadastradas
@@ -107,7 +107,7 @@ const getFilmes = async () => {
     alert(result.message)
     edicao = false;
     idEdicao = 0;
-    getVagas();
+    getFilmes();
 }
 
 

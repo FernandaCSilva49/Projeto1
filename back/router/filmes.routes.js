@@ -22,6 +22,12 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const idParam = req.params.id;
     const filme = filmes.find(filme => filme.id == idParam); // filme = no objeto 'filmes' vai procurar o filme que tem o id igual ao id param (id que aparece no link)
+    
+    if(!filme) {
+        res.status(404).send({error: 'Vaga nao encontrada'});
+        return;
+    }
+    
     res.send(filme);
 })
 
@@ -50,7 +56,7 @@ router.put('/edit/:id', (req, res) => {
     // faz um espelho do item na lista e um espelho do objeto atualizado e junta os 2
     filmes[index] = {
         ...filmes[index],
-        ...filmes        // faz um espelho dos dois para poder manter o id do primeiro
+        ...filmeEdit       // faz um espelho dos dois para poder manter o id do primeiro
     }
 
     res.send({
