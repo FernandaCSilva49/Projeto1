@@ -6,10 +6,9 @@ const filmes = [
     {
         id: Date.now(),
         nome: 'Interestelar',
-        imagem: 'url',
+        imagem: 'https://th.bing.com/th/id/OIP.qkZuWKUJK6XeRzYe31RZvADQEs?pid=ImgDet&rs=1',
         genero: 'Ação',
         nota: '10',
-        assistido: 'true'
     },
 ]
 
@@ -24,11 +23,11 @@ router.get('/:id', (req, res) => {
     const filme = filmes.find(filme => filme.id == idParam); // filme = no objeto 'filmes' vai procurar o filme que tem o id igual ao id param (id que aparece no link)
     
     if(!filme) {
-        res.status(404).send({error: 'Vaga nao encontrada'});
+        res.status(404).send({error: 'Filme nao encontrada'});
         return;
     }
     
-    res.send(filme);
+    res.send(filmes);
 })
 
 // [POST] /filmes/add - Cadastro de um novo filme
@@ -60,14 +59,14 @@ router.put('/edit/:id', (req, res) => {
     }
 
     res.send({
-        message: `${filmes[index].titulo} atualizado com sucesso.`,
+        message: `Filme ${filmes[index].titulo} editado com sucesso`,
         data: filmes[index]
-    })
+    });
 })
 
 // [DELETE] /filme/delete/{id} = exclui um item da lista de acordo com o seu id
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/deletar/:id', (req, res) => {
     // acessamos o id recebido via parametro
     const idParam = req.params.id;
 

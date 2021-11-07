@@ -2,7 +2,7 @@
 const lista = document.getElementById("lista");
 
 // atribuindo a endpoint da api do backend em um constante
-const apiUrl = "http://localhost:3000/filmes";
+const apiUrl = "http://localhost:2432/filmes";
 
 const edicao = false;
 const idEdicao = 0;
@@ -43,7 +43,7 @@ const getFilmes = async () => {
 
   // [POST] envia uma vaga para o backend para ser cadastrada
 
-  const submitForm = async (event) => {
+  const submitForm = (event) => {
     // previnir que o navegador atualiza a pagina por causa o evento de submit (que geralmente quando você envia as info pelo botão a pag atualiza)
     event.preventDefault();
 
@@ -84,7 +84,7 @@ const getFilmes = async () => {
     alert(result.message);
     // vaga cadastrada com sucesso.
 
-    lista.innerHTML = ""; // limpando as informações do html para ela não ser duplicada quando houver um cadastro novo
+     // limpando as informações do html para ela não ser duplicada quando houver um cadastro novo
 
     getFilmes();
   };
@@ -114,7 +114,7 @@ const getFilmes = async () => {
 // [DELETE] funcao que exclui um vaga de acordo com o seu id
 const deleteFilmes = async (id) => {
     // construir a requiscao de delete
-    const request = new Request(`${apiUrl}/delete/${id}`, {
+    const request = new Request(`${apiUrl}/deletar/${id}`, {
         method: 'DELETE'
     })
 
@@ -149,10 +149,10 @@ const editFilmes = async (id) => {
     const filme = await getFilmesById(id);
 
     //preencher os campos de acordo com o filme que vamos editar.
-    nome.value = vaga.nome;
-    imagem.value =  vaga.imagem;
-    genero.value = vaga.genero;
-    nota.value = vaga.nota;;
+    nome.value = filme.nome;
+    imagem.value =  filme.imagem;
+    genero.value = filme.genero;
+    nota.value = filme.nota;;
 }
 
 
