@@ -2,7 +2,7 @@
 const lista = document.getElementById("lista");
 
 // atribuindo a endpoint da api do backend em um constante
-const apiUrl = "http://localhost:2432/filmes";
+const apiUrl = "http://localhost:3000/filmes";
 
 const edicao = false;
 const idEdicao = 0;
@@ -24,26 +24,33 @@ const getFilmes = async () => {
   filmes.map((filme) => {
     lista.insertAdjacentHTML(
       "beforeend",
-      `  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-    <div class="card h-100">
-      <h5 class="card-title">${filme.nome}</h5>
-      <img src="${filme.imagem}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">Gênero: ${filme.genero}</p>
-        <p class="card-text">Nota: ${filme.nota}</p>
+      `  <div class="d-flex align-items-center">
+    <div class="col pb-5 mt-5">
+    <div class="card d-flex align-items-center border border-light mt-5" style="width: 13rem">
+      <h3 class="card-title p-3 text-light">${filme.nome}</h2>
+        <img src="${filme.imagem}" class="card-img-top ps-4 pe-4" alt="...">
+        <div class="card-body d-flex flex-row">
+          <div class="d-flex flex-column text-center pe-2 border border-light border-start-0 border-bottom-0 border-top-0">
+          <h5 class="card-text text-light"> Gênero </h5>
+          <p class="card-text text-light"> ${filme.genero}</p>
+          </div>
+          <div class="d-flex flex-column text-center ps-2 border border-light border-end-0 border-bottom-0 border-top-0">
+          <h5 class="card-text text-light">Nota </h5>
+          <p class="card-text text-light"> ${filme.nota}</p>
+          </div>
         </div>
-        <button type="button" class="btn btn-primary" onclick="putFilmes("${filme.id}")">Editar</button>
-        <button type="button" class="btn btn-outline-success" onclick="deleteFilmes("${filme.id}")">Excluir</button>
+        <button type="button" class="btn btn-light pe-5 ps-5" onclick="putFilmes("${filme.id}")">Editar</button>
+        <button type="button" class="btn btn-outline-danger pe-5 ps-5 mb-3" onclick="deleteFilmes("${filme.id}")">Excluir</button>
     </div>
   </div>
+</div>
         `
     );
   });
 
   // [POST] envia uma vaga para o backend para ser cadastrada
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     // previnir que o navegador atualiza a pagina por causa o evento de submit (que geralmente quando você envia as info pelo botão a pag atualiza)
     event.preventDefault();
 
@@ -72,7 +79,7 @@ const getFilmes = async () => {
       method: "POST", // método que a informação será levada
       body: JSON.stringify(filme), // transformando a informação em .json
       headers: new Headers({
-        "Content-Type": "application/json",
+        'Content-Type': "application/json",
       }),
     });
 
