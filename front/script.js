@@ -2,7 +2,7 @@
 const lista = document.getElementById("lista");
 
 // atribuindo a endpoint da api do backend em um constante
-const apiUrl = "http://localhost:3000/filmes";
+const apiUrl = "http://localhost:3000";
 
 const edicao = false;
 const idEdicao = 0;
@@ -22,31 +22,28 @@ const getFilmes = async () => {
   const filmes = await response.json(); /// -> espera o response receber u resultado, e guarda esse resultado como .jsom
   console.log(filmes);
   filmes.map((filme) => {
-    lista.insertAdjacentHTML(
-      "beforeend",
-      `  <div class="d-flex align-items-center">
-    <div class="col pb-5 mt-5">
-    <div class="card d-flex align-items-center border border-light mt-5" style="width: 13rem">
-      <h3 class="card-title p-3 text-light">${filme.nome}</h2>
-        <img src="${filme.imagem}" class="card-img-top ps-4 pe-4" alt="...">
-        <div class="card-body d-flex flex-row">
-          <div class="d-flex flex-column text-center pe-2 border border-light border-start-0 border-bottom-0 border-top-0">
-          <h5 class="card-text text-light"> Gênero </h5>
-          <p class="card-text text-light"> ${filme.genero}</p>
+    lista.insertAdjacentHTML('beforeend',
+      ` <div class='d-flex align-items-center'>
+    <div class='col pb-5 mt-5'> 
+    <div class='card d-flex align-items-center border border-light mt-5' style='width: 13rem'> 
+      <h3 class='card-title p-3 text-light'>${filme.nome}</h2>
+        <img src='${filme.imagem}' class='card-img-top ps-4 pe-4' alt='...'>
+        <div class='card-body d-flex flex-row'>
+          <div class='d-flex flex-column text-center pe-2 border border-light border-start-0 border-bottom-0 border-top-0'>
+          <h5 class='card-text text-light'> Gênero </h5>
+          <p class='card-text text-light'> ${filme.genero}</p>
           </div>
-          <div class="d-flex flex-column text-center ps-2 border border-light border-end-0 border-bottom-0 border-top-0">
-          <h5 class="card-text text-light">Nota </h5>
-          <p class="card-text text-light"> ${filme.nota}</p>
+          <div class='d-flex flex-column text-center ps-2 border border-light border-end-0 border-bottom-0 border-top-0'>
+          <h5 class='card-text text-light'>Nota </h5>
+          <p class='card-text text-light'> ${filme.nota}</p>
           </div>
         </div>
-        <button type="button" class="btn btn-light pe-5 ps-5" onclick="putFilmes("${filme.id}")">Editar</button>
-        <button type="button" class="btn btn-outline-danger pe-5 ps-5 mb-3" onclick="deleteFilmes("${filme.id}")">Excluir</button>
+        <button type='button' class='btn btn-light pe-5 ps-5' onclick='putFilmes('${filme.id}')'>Editar</button>
+        <button type='button' class='btn btn-outline-danger pe-5 ps-5 mb-3' onclick='deleteFilmes('${filme.id}')'>Excluir</button>
     </div>
   </div>
-</div>
-        `
-    );
-  });
+</div> ` );
+});
 
   // [POST] envia uma vaga para o backend para ser cadastrada
 
