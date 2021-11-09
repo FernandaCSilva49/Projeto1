@@ -2,10 +2,10 @@
 const lista = document.getElementById("lista");
 
 // atribuindo a endpoint da api do backend em um constante
-const apiUrl = "http://localhost:3000";
+const apiUrl = "http://localhost:3000/filmes";
 
-const edicao = false;
-const idEdicao = 0;
+var edicao = false;
+let idEdicao = 0;
 
 // pegar os dados que o usuario digita no input (Elementos)
 let nome = document.getElementById('nome');
@@ -38,12 +38,13 @@ const getFilmes = async () => {
           <p class='card-text text-light'> ${filme.nota}</p>
           </div>
         </div>
-        <button type='button' class='btn btn-light pe-5 ps-5' onclick='putFilmes('${filme.id}')'>Editar</button>
-        <button type='button' class='btn btn-outline-danger pe-5 ps-5 mb-3' onclick='deleteFilmes('${filme.id}')'>Excluir</button>
+        <button type='button' class='btn btn-light pe-5 ps-5' onclick="editFilmes('${filme.id}')">Editar</button>
+        <button type='button' class='btn btn-outline-danger pe-5 ps-5 mb-3' onclick="deleteFilmes('${filme.id}')">Excluir</button>
     </div>
   </div>
 </div> ` );
 });
+}
 
   // [POST] envia uma vaga para o backend para ser cadastrada
 
@@ -97,7 +98,7 @@ const getFilmes = async () => {
     // estou construindo a requisicao para ser enviada para o backend.
     const request = new Request(`${apiUrl}/edit/${id}`, {
         method:  'PUT',
-        body: JSON.stringify(vaga),
+        body: JSON.stringify(filme),
         headers: new Headers({
             'Content-Type': 'application/json'
         })
@@ -166,8 +167,5 @@ const clearFields = () => {
     genero.value = '';
     nota.value = '';
 }
-
-
-};
 
 getFilmes();

@@ -4,28 +4,28 @@ const router = express.Router();
 
 const filmes = [
     {
-        id: Date.now(),
+        id: Math.random (),
         nome: 'Interestelar',
         imagem: 'https://th.bing.com/th/id/OIP.qkZuWKUJK6XeRzYe31RZvADQEs?pid=ImgDet&rs=1',
         genero: 'Ação',
         nota: '9',
     },
     {
-        id: Date.now(),
+        id:  Math.random (),
         nome: 'Castelo Animado',
         imagem: 'https://cps-static.rovicorp.com/2/Open/Brainstorm_Media_1300/Program/6180693/_derived_jpg_q90_600x800_m0/6180693_Howls_Moving_Castle_2000x3000.jpg',
         genero: 'Animação',
         nota: '10',
     },
     {
-        id: Date.now(),
+        id:  Math.random (),
         nome: 'Matrix',
         imagem: 'https://cps-static.rovicorp.com/2/Open/Warner%20Brothers%20Distribution/Movies/The%20Matrix/_2by3/_derived_jpg_q90_584x800_m0/098710-036C_CR.jpg',
         genero: 'Ação',
         nota: '8',
     },
     {
-        id: Date.now(),
+        id:  Math.random (),
         nome: 'Mary Shelley',
         imagem: 'https://www.hostfilmes.com/wp-content/uploads/2018/12/Mary-Shelley-Dublado.jpg',
         genero: 'Biografia',
@@ -48,14 +48,14 @@ router.get('/:id', (req, res) => {
         return;
     }
     
-    res.send(filmes);
+    res.send(filme);
 })
 
 // [POST] /filmes/add - Cadastro de um novo filme
 router.post('/add', (req, res) => {
     // requerindo o objeto que o cliente inseriu (no body)
     const filme = req.body;
-    filme.id = Date.now();
+    filme.id =  Math.random ();
     filmes.push(filme);
     res.status(201).send({    // o 'status(201)' diz que aquela ação deu certo
         message: `${filme.nome} foi cadastrado com sucesso.`,
@@ -80,7 +80,7 @@ router.put('/edit/:id', (req, res) => {
     }
 
     res.send({
-        message: `Filme ${filmes[index].titulo} editado com sucesso`,
+        message: `${filmes[index].nome} editado com sucesso`,
         data: filmes[index]
     });
 })
